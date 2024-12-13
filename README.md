@@ -24,13 +24,12 @@ public class Shopping {
                 scanner.next(); // Здесь очищаю ввод пользователя.
             } else {
                 actionNumber = scanner.nextInt();
-                scanner.nextLine(); // Очищаем буфер
 
                 // Начинаем проверять ввод пользователя
                 if (actionNumber == 1) {
                     if (productCount < shoppingList.length) {
                         System.out.print("Введите название товара: ");
-                        String product = scanner.nextLine();
+                        String product = scanner.next();
 
                         boolean searchForDuplicates = false;
 
@@ -54,7 +53,7 @@ public class Shopping {
                         System.out.println("Извините, список полон!");
                     }
                 } else if (actionNumber == 2) {
-                    if ((productCount != 0)) {
+                    if (productCount != 0) {
                         System.out.println("Список покупок:");
                         for (int i = 0; i < productCount; i++) {
                             System.out.println((i + 1) + "." + shoppingList[i]);
@@ -63,8 +62,13 @@ public class Shopping {
                         System.out.println("Список товаров пуст!");
                     }
                 } else if (actionNumber == 3) {
-                    productCount = 0;
-                    System.out.println("Список очищен!");
+                    if (productCount != 0) {
+                        productCount = 0;
+                        System.out.println("Список очищен!");
+                    } else {
+                        System.out.println("Список товаров пуст!");
+                    }
+
                 } else if (actionNumber == 4) {
                     System.out.println("До скорых встреч!");
                     return;
