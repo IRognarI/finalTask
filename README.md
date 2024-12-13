@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Shopping {
-
     public static void main(String[] args) {
 
         System.out.println("Вас приветствует список покупок!");
@@ -25,15 +24,32 @@ public class Shopping {
                 scanner.next(); // Здесь очищаю ввод пользователя.
             } else {
                 actionNumber = scanner.nextInt();
+                scanner.nextLine(); // Очищаем буфер
 
                 // Начинаем проверять ввод пользователя
                 if (actionNumber == 1) {
                     if (productCount < shoppingList.length) {
                         System.out.print("Введите название товара: ");
-                        String product = scanner.next();
-                        shoppingList[productCount] = product;
-                        System.out.println("Товар " + product + " добавлен в список под номером " + (productCount + 1));
-                        productCount++;
+                        String product = scanner.nextLine();
+
+                        boolean searchForDuplicates = false;
+
+                        for (int i = 0; i < productCount; i++) {
+                            if (shoppingList[i].equalsIgnoreCase(product)) {
+                                searchForDuplicates = true;
+                                break;
+                            }
+                        }
+
+                        if (!(searchForDuplicates)) {
+                            shoppingList[productCount] = product;
+                            System.out.println("Товар " + product + " добавлен в список под номером " + (productCount + 1));
+                            productCount++;
+                        } else {
+                            System.out.println("Такой товар уже есть. Укажите другой!");
+                        }
+
+
                     } else {
                         System.out.println("Извините, список полон!");
                     }
